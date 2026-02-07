@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Hasina, From Sagar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Quicksand:wght@400;600&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #ffe4e1;
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .heart-fall {
+            position: fixed;
+            top: -10%;
+            color: #ff4d6d;
+            font-size: 1.5rem;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.2);
+            max-width: 450px;
+            z-index: 10;
+            margin: 20px;
+            border: 2px solid #ffb6c1;
+        }
+
+        #timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #d63384;
+        }
+        .time-unit { display: flex; flex-direction: column; font-size: 0.7rem; }
+        .time-unit span { font-size: 1.2rem; }
+
+        h1 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2.5rem; margin-bottom: 5px; }
+        
+        .story-box {
+            background: #fffafa;
+            border-left: 5px solid #ff4d6d;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+            text-align: left;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .memory-wall {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .polaroid {
+            background: white;
+            padding: 8px 8px 15px 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+        }
+        .polaroid:nth-child(even) { transform: rotate(2deg); }
+        .polaroid img { width: 100%; height: 150px; object-fit: cover; }
+        .polaroid p { font-family: 'Pacifico', cursive; font-size: 0.7rem; margin: 5px 0 0 0; color: #d63384; }
+
+        .reasons-container { 
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            margin-bottom: 15px; 
+        }
+        .heart-box { font-size: 1.8rem; cursor: pointer; position: relative; }
+        .reason-text {
+            position: absolute; bottom: 45px; left: 50%; transform: translateX(-50%);
+            background: #ff4d6d; color: white; padding: 8px; border-radius: 10px;
+            font-size: 0.75rem; width: 100px; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        .heart-box:hover .reason-text { display: block; }
+
+        .buttons { position: relative; min-height: 120px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+        #yesBtn { background-color: #ff4d6d; color: white; padding: 15px 35px; border-radius: 50px; border: none; font-size: 1.3rem; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4); }
+        #noBtn { background-color: #adb5bd; color: white; padding: 12px 25px; border-radius: 50px; border: none; cursor: pointer; transition: all 0.2s; }
+
+        .hidden { display: none !important; }
+        .signature { margin-top: 15px; font-size: 0.8rem; color: #888; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/v4ye8i.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="mainCard">
+        <div id="timer">
+            <div class="time-unit"><span id="days">00</span>days</div>
+            <div class="time-unit"><span id="hours">00</span>hrs</div>
+            <div class="time-unit"><span id="mins">00</span>mins</div>
+        </div>
+
+        <h1>Hi Hasina...</h1>
+        
+        <div class="memory-wall">
+            <div class="polaroid">
+                <img src="https://i.postimg.cc/3wmNC3HJ/IMG_5655.jpg" alt="Sagar and Hasina">
+                <p>Always together</p>
+            </div>
+            <div class="polaroid">
+                <img src="https://i.postimg.cc/RZs92H7K/IMG-5654.jpg" alt="Hasina in Black Kurtha">
+                <p>Mesmerizing ❤️</p>
+            </div>
+        </div>
+
+        <div class="story-box">
+            "When I saw you in that <b>black kurtha</b>, you were so beautiful that I couldn’t even take my eyes off."
+        </div>
+
+        <div class="story-box" style="border-left-color: #ffb6c1;">
+            "I want to promise you that jasto j vaye pani I will always be there for you ani we will get succeed together."
+        </div>
+
+        <div class="reasons-container">
+            <div class="heart-box">💖 <span class="reason-text">Beautiful</span></div>
+            <div class="heart-box">💖 <span class="reason-text">Funny</span></div>
+            <div class="heart-box">💖 <span class="reason-text">Mine</span></div>
+            <div class="heart-box">💖 <span class="reason-text">Only Mine</span></div>
+        </div>
+
+        <h3 style="color: #d63384;">Will you be my Valentine?</h3>
+
+        <div class="buttons">
+            <button id="yesBtn">Yes!</button>
+            <button id="noBtn">No</button>
+        </div>
+        <div class="signature">Made for Hasina by Sagar</div>
+    </div>
+
+    <div class="container hidden" id="successMessage">
+        <h1 style="font-size: 3.5rem;">Yay! ❤️</h1>
+        <p style="font-size: 1.2rem; color: #ff4d6d; padding: 0 10px;">
+            "Thank you baby for accepting me even though who I am. Thank you for always giving me the motivation. My everything."
+        </p>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" width="200">
+        <p style="margin-top: 20px; font-weight: bold; font-family: 'Pacifico';">Forever Yours, Sagar</p>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const music = document.getElementById('bgMusic');
+        let yesScale = 1;
+        let noScale = 1;
+
+        const target = new Date("Feb 14, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        }, 1000);
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 400);
+
+        noBtn.addEventListener('click', () => {
+            yesScale += 0.4;
+            noScale -= 0.15;
+            yesBtn.style.transform = `scale(${yesScale})`;
+            noBtn.style.transform = `scale(${noScale})`;
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            if (noScale <= 0.2) noBtn.style.display = 'none';
+        });
+
+        yesBtn.addEventListener('click', () => {
+            document.getElementById('mainCard').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            music.play().catch(e => console.log("Audio play failed", e));
+        });
+    </script>
+</body>
+</html>
