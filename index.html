@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Hasina</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #240b36, #c31432);
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .pixel-heart {
+            position: fixed;
+            top: -10%;
+            color: #ff4d6d;
+            font-size: 15px;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            z-index: 10;
+            margin: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .intro-gif, .success-gif {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 { font-size: 10px; color: #ffb3c1; margin-bottom: 25px; text-shadow: 2px 2px #000; line-height: 1.8; }
+        
+        .story-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid #ff4d6d;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 7px;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        /* Memory Wall for Success Screen */
+        .memory-wall { display: flex; gap: 10px; margin: 15px 0; animation: popIn 0.5s ease-out; }
+        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+
+        .polaroid {
+            background: white;
+            padding: 5px 5px 12px 5px;
+            width: 50%;
+            transform: rotate(-2deg);
+        }
+        .polaroid img { width: 100%; height: 110px; object-fit: cover; }
+        .polaroid p { font-size: 5px; margin: 5px 0 0 0; color: #000; }
+
+        .btn-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            min-height: 120px;
+        }
+
+        .pixel-btn {
+            background: #ff4d6d;
+            color: white;
+            padding: 12px;
+            border: 3px solid #fff;
+            font-family: 'Press Start 2P';
+            font-size: 8px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        #noBtn {
+            background: #444;
+            color: #bbb;
+            border: 3px solid #666;
+            z-index: 999;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/v4ye8i.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="mainCard">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZ2ExYzRodWx1cGZjdWZjNm12NmFoYjlkZ2N5aWlzNHNubjY3YjdxNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8xnLp0v1Mf1elB0n6T/giphy.gif" class="intro-gif">
+        
+        <h1>WILL YOU BE MY VALENTINE? 💖</h1>
+
+        <div class="story-box">"WHEN I SAW YOU IN THAT BLACK KURTHA, YOU WERE SO BEAUTIFUL."</div>
+        <div class="story-box">"JASTO J VAYE PANI I WILL ALWAYS BE THERE FOR YOU."</div>
+
+        <div class="btn-container">
+            <button class="pixel-btn" id="yesBtn">YES! ❤️</button>
+            <button class="pixel-btn" id="noBtn">NO</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="successMessage">
+        <img src="https://media.giphy.com/media/jG4RVblwC0wG2U0m0L/giphy.gif" class="success-gif">
+        
+        <div class="memory-wall">
+            <div class="polaroid">
+                <img src="https://i.postimg.cc/3wmNC3HJ/IMG_5655.jpg">
+                <p>US ❤️</p>
+            </div>
+            <div class="polaroid" style="transform: rotate(2deg);">
+                <img src="https://i.postimg.cc/43sv9LDG/75247B53-D509-4B59-9334-721F4229DE6F.jpg">
+                <p>BEAUTIFUL</p>
+            </div>
+        </div>
+
+        <p style="font-size: 8px; line-height: 2.2; color: #ffb3c1; margin-top: 15px;">
+            THANK YOU BABY FOR ACCEPTING ME EVEN THOUGH WHO I AM. 
+            <br><br>
+            THANK YOU FOR ALWAYS GIVING ME THE MOTIVATION. 
+            <br><br>
+            MY EVERYTHING.
+        </p>
+        <h2 style="font-size: 10px; color: #fff; margin-top: 25px; text-shadow: 2px 2px #ff4d6d;">
+            FOREVER YOURS, SAGAR ❤️
+        </h2>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const music = document.getElementById('bgMusic');
+
+        const moveNoButton = () => {
+            noBtn.innerText = "WHY NOO HMMM";
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        };
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        yesBtn.addEventListener('click', () => {
+            document.getElementById('mainCard').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            music.play();
+            setInterval(createHeart, 100);
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('pixel-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
