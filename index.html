@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; background-color: white; overflow-x: hidden; }
+        #fake404 {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; color: black; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; font-family: Arial, sans-serif; z-index: 10000;
+        }
+
+        #main-wrapper {
+            display: none; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            min-height: 100vh; width: 100vw; flex-direction: column; align-items: center;
+            font-family: 'Press Start 2P', cursive; padding: 40px 0; position: relative;
+        }
+
+        #star-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--duration) infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            width: 85%; max-width: 450px; z-index: 10; border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white; text-align: center; margin: 20px auto;
+        }
+
+        /* VERTICAL ENVELOPES */
+        .envelope-list { display: flex; flex-direction: column; gap: 30px; width: 100%; align-items: center; z-index: 10; }
+        .envelope-card {
+            background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 20px;
+            width: 80%; cursor: pointer; border: 2px solid transparent; transition: 0.3s;
+        }
+        .envelope-card:hover { border-color: #ff4d6d; transform: scale(1.02); }
+
+        /* BIGGER ENVELOPES */
+        .pixel-env {
+            width: 100px; height: 65px; background: #ff4d6d; border: 3px solid #fff;
+            margin: 15px auto; position: relative; box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+        }
+        .pixel-env::after {
+            content: ""; position: absolute; top: 0; left: 0;
+            border-left: 47px solid transparent; border-right: 47px solid transparent;
+            border-top: 35px solid #fff; opacity: 0.9;
+        }
+
+        /* SCROLL OVERLAY */
+        #scrollOverlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); z-index: 20000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .scroll-content {
+            background: #fdf5e6; color: #2b2b2b; width: 100%; max-width: 400px; max-height: 80vh;
+            padding: 50px 30px; border-radius: 5px; position: relative; overflow-y: auto;
+            font-family: 'Dancing Script', cursive; font-size: 22px; line-height: 1.6;
+            border: 12px double #d4c4a8; /* Scroll/Paper effect */
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+        }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-family: Arial; font-size: 35px; cursor: pointer; color: #cc4444; }
+        .scroll-content img { width: 100%; border-radius: 10px; margin-bottom: 25px; border: 1px solid #ddd; }
+
+        /* FINAL MESSAGE */
+        #final-love {
+            display: none; font-size: 18px; color: #ff4d6d; margin-top: 40px;
+            text-shadow: 2px 2px #000; animation: heartBeat 1.5s infinite;
+        }
+        @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+        .pixel-btn { background: #ff4d6d; color: white; padding: 15px; border: 3px solid #fff; font-family: 'Press Start 2P'; font-size: 10px; cursor: pointer; margin: 15px; }
+    </style>
+</head>
+<body>
+
+    <div id="fake404">
+        <h1 style="font-size: 50px; margin: 0;">404</h1>
+        <p>Not Found</p>
+        <button onclick="revealValentine()" style="padding: 10px 20px; cursor: pointer;">Refresh</button>
+    </div>
+
+    <div id="main-wrapper">
+        <div id="star-container"></div>
+
+        <div class="container" id="mainCard">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZ2ExYzRodWx1cGZjdWZjNm12NmFoYjlkZ2N5aWlzNHNubjY3YjdxNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8xnLp0v1Mf1elB0n6T/giphy.gif" style="width:100%; border-radius:10px;">
+            <h1 style="font-size: 12px; margin: 25px 0;">WILL YOU BE MY VALENTINE? 💖</h1>
+            <button class="pixel-btn" id="yesBtn">YES! ❤️</button>
+            <button class="pixel-btn" id="noBtn">NO</button>
+        </div>
+
+        <div id="timelineScreen" style="display:none; width: 100%; z-index: 20; text-align: center;">
+            <p style="font-size: 12px; color: #ffb3c1; margin-bottom: 30px;">OUR STORY...</p>
+            <div class="envelope-list">
+                <div class="envelope-card" onclick="openScroll(1)">
+                    <p style="font-size: 8px; color: #fff; margin-bottom:15px;">1. THE START</p>
+                    <div class="pixel-env"></div>
+                </div>
+                <div class="envelope-card" onclick="openScroll(2)">
+                    <p style="font-size: 8px; color: #fff; margin-bottom:15px;">2. THE NOW</p>
+                    <div class="pixel-env"></div>
+                </div>
+                <div class="envelope-card" onclick="openScroll(3)">
+                    <p style="font-size: 8px; color: #fff; margin-bottom:15px;">3. FOREVER</p>
+                    <div class="pixel-env"></div>
+                </div>
+            </div>
+            <h2 id="final-love">I LOVE YOU HASINA! ❤️</h2>
+        </div>
+    </div>
+
+    <div id="scrollOverlay">
+        <div class="scroll-content">
+            <span class="close-btn" onclick="closeScroll()">&times;</span>
+            <div id="scrollText"></div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop src="https://files.catbox.moe/v4ye8i.mp3"></audio>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+        let openedEnvelopes = new Set();
+        
+        const stories = {
+            1: `<img src="https://i.postimg.cc/43sv9LDG/75247B53-D509-4B59-9334-721F4229DE6F.jpg">
+                Baby, jaba maile tmilai tyo kaalo kurtha ma dekhey you were like an angel who fell straight from heaven. I didn’t know that you would accept me even though who i am. When you sat on my scooter and jaba tmiley tmro haat mero shoulder ma rakhyeu my heart beat so loudly and so fast. Aajhai pani yaad xa tyo din malai haha kasari birsina sakxu ra.`,
+            2: `<img src="https://i.postimg.cc/3wmNC3HJ/IMG_5655.jpg">
+                Now, this is us. We are happy together and I can’t live without you. Jati jhagda vayepani jasto j vayepani I will never leave your hands. Sansaar ley manos namanos hami success vayerai xadxam. I won’t give up on you. You are very beautiful from inside and outside. I want to share our stories even with our kids too. Haha bachha jasto kura garxu kaile kai. But it’s my dream. You are my dream, my world, my everything.`,
+            3: `<img src="https://i.postimg.cc/L88gFJZN/1000106086.jpg">
+                This was the first gift I ever gave you, and it’s a symbol of my promise to you forever. Thank you for accepting me as your valentine. I love you Hasina. forever baby. ❤️`
+        };
+
+        function createStars() {
+            const container = document.getElementById('star-container');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 'px';
+                star.style.width = size; star.style.height = size;
+                star.style.top = Math.random() * 100 + 'vh'; star.style.left = Math.random() * 100 + 'vw';
+                star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+                container.appendChild(star);
+            }
+        }
+
+        function revealValentine() {
+            music.play().then(() => music.pause()).catch(() => {});
+            document.getElementById('fake404').style.display = 'none';
+            document.getElementById('main-wrapper').style.display = 'flex';
+            createStars();
+        }
+
+        document.getElementById('yesBtn').onclick = () => {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => {
+                document.getElementById('mainCard').style.display = 'none';
+                document.getElementById('timelineScreen').style.display = 'block';
+                music.play();
+            }, 500);
+        };
+
+        function openScroll(id) {
+            document.getElementById('scrollText').innerHTML = stories[id];
+            document.getElementById('scrollOverlay').style.display = 'flex';
+            openedEnvelopes.add(id);
+        }
+
+        function closeScroll() {
+            document.getElementById('scrollOverlay').style.display = 'none';
+            // Show I LOVE YOU after the 3rd envelope is read and closed
+            if (openedEnvelopes.has(3)) {
+                document.getElementById('final-love').style.display = 'block';
+            }
+        }
+
+        const noBtn = document.getElementById('noBtn');
+        noBtn.onmouseover = noBtn.ontouchstart = (e) => {
+            e.preventDefault();
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px'; noBtn.style.top = y + 'px';
+        };
+    </script>
+</body>
+</html>
